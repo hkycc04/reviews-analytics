@@ -1,5 +1,6 @@
 #讀取共100萬筆紀錄
 #為何不用加strip，加入後讀取筆數有差異
+#function開頭不會是大寫字母，物件開頭才會是大寫字母
 
 import time
 import progressbar
