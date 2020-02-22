@@ -1,14 +1,18 @@
 #讀取共100萬筆紀錄
 #為何不用加strip，加入後讀取筆數有差異
 
+import time
+import progressbar
+
 data = []
 count = 0
+bar = progressbar.ProgressBar(max_value = 1000000)
 with open('reviews.txt', 'r') as f:
     for line in f:
         data.append(line)
         count += 1
-        if count % 1000 == 0:
-        	print(len(data))
+        bar.update(count)
+
 print('檔案讀取完了, 總共有', len(data), '筆資料')
 
 sum_len = 0
@@ -31,6 +35,7 @@ print('一共有', len(good), '留言提到good')
 
 #文字計數
 
+start_time = time.time()
 wc = {} #word_count
 for d in data:
 	words = d.split()
@@ -43,6 +48,9 @@ for word in wc: #把key抓出來
 	if wc[word] > 1000000:
 		print(word, wc[word]) #後面的次數也印出來
 print(len(wc))
+end_time = time.time()
+print('花了', end_time - start_time, '秒')
+
 
 while True:
 	word = input('請問您想查什麼字: ')
